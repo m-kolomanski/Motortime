@@ -22,16 +22,16 @@ PlasmoidItem {
         // ── Navigation ───────────────────────────────────────────────────
         property int weekOffset: 0
 
-        // ── Series colours ───────────────────────────────────────────────
-        readonly property var seriesCfg: ({
-            "F1":   { color: "#E8002D", logo: "../assets/logos/f1.svg"   },
-            "F2":   { color: "#FF6B35", logo: "../assets/logos/f2.svg"   },
-            "F3":   { color: "#FFD166", logo: "../assets/logos/f3.svg"   },
-            "WEC":  { color: "#00B4D8", logo: "../assets/logos/wec.svg"  },
-            "IMSA": { color: "#06D6A0", logo: "../assets/logos/imsa.svg" },
-            "NLS":  { color: "#A663CC", logo: ""                         },
-            "GTWC": { color: "#F4A261", logo: ""                         },
-            "WRC":  { color: "#EF476F", logo: "../assets/logos/wrc.svg"  }
+        // ── Series logos (colors come from config) ───────────────────────
+        readonly property var seriesLogos: ({
+            "F1":   "../assets/logos/f1.svg",
+            "F2":   "../assets/logos/f2.svg",
+            "F3":   "../assets/logos/f3.svg",
+            "WEC":  "../assets/logos/wec.svg",
+            "IMSA": "../assets/logos/imsa.svg",
+            "NLS":  "",
+            "GTWC": "",
+            "WRC":  "../assets/logos/wrc.svg"
         })
 
         // ── Event data ───────────────────────────────────────────────────
@@ -168,7 +168,24 @@ PlasmoidItem {
         }
 
         // ── Series helpers ────────────────────────────────────────────────
-        function seriesColor(s) { return seriesCfg[s] ? seriesCfg[s].color : "#888888" }
+        readonly property var defaultColors: ({
+            "F1":   "#E8002D",
+            "F2":   "#FF6B35",
+            "F3":   "#FFD166",
+            "WEC":  "#00B4D8",
+            "IMSA": "#06D6A0",
+            "NLS":  "#A663CC",
+            "GTWC": "#F4A261",
+            "WRC":  "#EF476F"
+        })
+
+        function seriesColor(s) {
+            var c = Plasmoid.configuration[s + "Color"]
+            return (c && c.length > 0) ? c : (defaultColors[s] || "#888888")
+        }
+        function seriesEnabled(s) {
+            return Plasmoid.configuration[s + "Enabled"] !== false
+        }
         function contrastColor(hex) {
             var r = parseInt(hex.slice(1,3), 16)
             var g = parseInt(hex.slice(3,5), 16)
@@ -183,6 +200,7 @@ PlasmoidItem {
             var result = []
             for (var i = 0; i < events.length; i++) {
                 var ev = events[i]
+                if (!seriesEnabled(ev.series)) continue
                 if (ev.end < wS || ev.start > wE) continue
                 var sc = Math.max(0, daysDiff(wS, ev.start))
                 var ec = Math.min(6, daysDiff(wS, ev.end))
@@ -475,7 +493,7 @@ PlasmoidItem {
                                     height: weekRow.dynBarH * 2.2
                                     width:  seriesTag.logoPath !== "" ? Math.min(weekRow.dynBarH * 6, 90) : fallbackText.implicitWidth
 
-                                    readonly property string logoPath: seriesCfg[ev.series] ? seriesCfg[ev.series].logo : ""
+                                    readonly property string logoPath: seriesLogos[ev.series] || ""
 
                                     Image {
                                         id: logoImg

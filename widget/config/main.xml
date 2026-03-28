@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="General">
+        <entry name="F1Enabled"   type="Bool">  <default>true</default>    </entry>
+        <entry name="F1Color"     type="String"><default>#E8002D</default>  </entry>
+        <entry name="F2Enabled"   type="Bool">  <default>true</default>    </entry>
+        <entry name="F2Color"     type="String"><default>#FF6B35</default>  </entry>
+        <entry name="F3Enabled"   type="Bool">  <default>true</default>    </entry>
+        <entry name="F3Color"     type="String"><default>#FFD166</default>  </entry>
+        <entry name="WECEnabled"  type="Bool">  <default>true</default>    </entry>
+        <entry name="WECColor"    type="String"><default>#00B4D8</default>  </entry>
+        <entry name="IMSAEnabled" type="Bool">  <default>true</default>    </entry>
+        <entry name="IMSAColor"   type="String"><default>#06D6A0</default>  </entry>
+        <entry name="NLSEnabled"  type="Bool">  <default>true</default>    </entry>
+        <entry name="NLSColor"    type="String"><default>#A663CC</default>  </entry>
+        <entry name="GTWCEnabled" type="Bool">  <default>true</default>    </entry>
+        <entry name="GTWCColor"   type="String"><default>#F4A261</default>  </entry>
+        <entry name="WRCEnabled"  type="Bool">  <default>true</default>    </entry>
+        <entry name="WRCColor"    type="String"><default>#EF476F</default>  </entry>
+    </group>
+</kcfg>
