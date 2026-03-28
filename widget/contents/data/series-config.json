@@ -1,0 +1,10 @@
+{
+  "F1":   { "color": "#E8002D", "label": "Formula 1" },
+  "F2":   { "color": "#FF6B35", "label": "Formula 2" },
+  "F3":   { "color": "#FFD166", "label": "Formula 3" },
+  "WEC":  { "color": "#00B4D8", "label": "WEC" },
+  "IMSA": { "color": "#06D6A0", "label": "IMSA" },
+  "NLS":  { "color": "#A663CC", "label": "NLS" },
+  "GTWC": { "color": "#F4A261", "label": "GTWC" },
+  "WRC":  { "color": "#EF476F", "label": "WRC" }
+}

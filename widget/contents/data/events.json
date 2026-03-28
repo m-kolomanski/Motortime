@@ -1,0 +1,140 @@
+{
+  "generated": "2026-03-28T12:00:00Z",
+  "events": [
+    {
+      "id": "wec-2026-prologue",
+      "series": "WEC",
+      "location": "Qatar",
+      "event_type": "Prologue",
+      "flag": "🇶🇦",
+      "start": "2026-03-13",
+      "end": "2026-03-17"
+    },
+    {
+      "id": "f1-2026-r2-australia",
+      "series": "F1",
+      "location": "Melbourne",
+      "event_type": "Grand Prix",
+      "flag": "🇦🇺",
+      "start": "2026-03-20",
+      "end": "2026-03-22"
+    },
+    {
+      "id": "f2-2026-r2-australia",
+      "series": "F2",
+      "location": "Melbourne",
+      "event_type": "Round 2",
+      "flag": "🇦🇺",
+      "start": "2026-03-21",
+      "end": "2026-03-22"
+    },
+    {
+      "id": "nls-2026-r1",
+      "series": "NLS",
+      "location": "Nürburgring",
+      "event_type": "Round 1",
+      "flag": "🇩🇪",
+      "start": "2026-03-21",
+      "end": "2026-03-21"
+    },
+    {
+      "id": "wrc-2026-r3-mexico",
+      "series": "WRC",
+      "location": "Mexico",
+      "event_type": "Rally",
+      "flag": "🇲🇽",
+      "start": "2026-03-19",
+      "end": "2026-03-23"
+    },
+    {
+      "id": "f1-2026-r3-bahrain",
+      "series": "F1",
+      "location": "Bahrain",
+      "event_type": "Grand Prix",
+      "flag": "🇧🇭",
+      "start": "2026-03-27",
+      "end": "2026-03-29"
+    },
+    {
+      "id": "f2-2026-r3-bahrain",
+      "series": "F2",
+      "location": "Bahrain",
+      "event_type": "Round 3",
+      "flag": "🇧🇭",
+      "start": "2026-03-28",
+      "end": "2026-03-29"
+    },
+    {
+      "id": "f3-2026-r3-bahrain",
+      "series": "F3",
+      "location": "Bahrain",
+      "event_type": "Round 3",
+      "flag": "🇧🇭",
+      "start": "2026-03-28",
+      "end": "2026-03-29"
+    },
+    {
+      "id": "wec-2026-r1-portimao",
+      "series": "WEC",
+      "location": "Portimão",
+      "event_type": "6h Race",
+      "flag": "🇵🇹",
+      "start": "2026-04-04",
+      "end": "2026-04-05"
+    },
+    {
+      "id": "gtwc-2026-r1-paul-ricard",
+      "series": "GTWC",
+      "location": "Paul Ricard",
+      "event_type": "3h Race",
+      "flag": "🇫🇷",
+      "start": "2026-04-04",
+      "end": "2026-04-05"
+    },
+    {
+      "id": "imsa-2026-r3-mid-ohio",
+      "series": "IMSA",
+      "location": "Mid-Ohio",
+      "event_type": "4h Race",
+      "flag": "🇺🇸",
+      "start": "2026-04-05",
+      "end": "2026-04-05"
+    },
+    {
+      "id": "wrc-2026-r4-croatia",
+      "series": "WRC",
+      "location": "Croatia",
+      "event_type": "Rally",
+      "flag": "🇭🇷",
+      "start": "2026-04-09",
+      "end": "2026-04-12"
+    },
+    {
+      "id": "f1-2026-r4-china",
+      "series": "F1",
+      "location": "Shanghai",
+      "event_type": "Grand Prix",
+      "flag": "🇨🇳",
+      "start": "2026-04-10",
+      "end": "2026-04-12"
+    },
+    {
+      "id": "f2-2026-r4-china",
+      "series": "F2",
+      "location": "Shanghai",
+      "event_type": "Round 4",
+      "flag": "🇨🇳",
+      "start": "2026-04-11",
+      "end": "2026-04-12"
+    },
+    {
+      "id": "nls-2026-r2",
+      "series": "NLS",
+      "location": "Nürburgring",
+      "event_type": "Round 2",
+      "flag": "🇩🇪",
+      "start": "2026-04-11",
+      "end": "2026-04-11"
+    }
+  ]
+}

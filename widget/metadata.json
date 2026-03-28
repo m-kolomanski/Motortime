@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Id": "com.github.motortime",
+        "Name": "Motortime",
+        "Description": "Motorsport calendar for your desktop",
+        "Icon": "view-calendar",
+        "Version": "0.1.0",
+        "License": "GPL-2.0-or-later",
+        "Authors": [
+            {
+                "Name": "Mateusz"
+            }
+        ],
+        "Category": "Date and Time"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
