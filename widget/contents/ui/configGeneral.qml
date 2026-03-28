@@ -8,7 +8,7 @@ Item {
     id: cfg
     implicitHeight: col.implicitHeight
 
-    // Plasma reads these from main.xml defaults and saves them on Apply
+    property string cfg_SeriesOrder: "F1,F2,F3,WEC,IMSA,NLS,GTWC,WRC"
     property bool   cfg_F1Enabled:   true
     property string cfg_F1Color:     "#E8002D"
     property bool   cfg_F2Enabled:   true
@@ -26,42 +26,74 @@ Item {
     property bool   cfg_WRCEnabled:  true
     property string cfg_WRCColor:    "#EF476F"
 
-    readonly property var seriesList: [
-        { key: "F1",   name: "Formula 1"                   },
-        { key: "F2",   name: "Formula 2"                   },
-        { key: "F3",   name: "Formula 3"                   },
-        { key: "WEC",  name: "World Endurance Championship" },
-        { key: "IMSA", name: "IMSA SportsCar Championship" },
-        { key: "NLS",  name: "Nürburgring Langstrecken"    },
-        { key: "GTWC", name: "GT World Challenge"          },
-        { key: "WRC",  name: "World Rally Championship"    }
-    ]
+    readonly property var seriesNames: ({
+        "F1":   "Formula 1",
+        "F2":   "Formula 2",
+        "F3":   "Formula 3",
+        "WEC":  "World Endurance Championship",
+        "IMSA": "IMSA SportsCar Championship",
+        "NLS":  "Nürburgring Langstrecken",
+        "GTWC": "GT World Challenge",
+        "WRC":  "World Rally Championship"
+    })
+
+    ListModel { id: seriesModel }
+
+    function rebuildModel() {
+        seriesModel.clear()
+        var keys = cfg_SeriesOrder.split(",")
+        for (var i = 0; i < keys.length; i++) {
+            var k = keys[i].trim()
+            if (k) seriesModel.append({ key: k })
+        }
+    }
+
+    function syncOrder() {
+        var keys = []
+        for (var i = 0; i < seriesModel.count; i++)
+            keys.push(seriesModel.get(i).key)
+        cfg_SeriesOrder = keys.join(",")
+    }
+
+    Component.onCompleted: rebuildModel()
 
     ColumnLayout {
         id: col
         anchors { left: parent.left; right: parent.right; top: parent.top }
+        spacing: 2
 
-        Kirigami.FormLayout {
-            Layout.fillWidth: true
+        Repeater {
+            model: seriesModel
+            delegate: RowLayout {
+                Layout.fillWidth: true
+                spacing: 6
 
-            Repeater {
-                model: cfg.seriesList
-                delegate: RowLayout {
-                    spacing: 8
-                    Kirigami.FormData.label: modelData.name
+                QQC2.ToolButton {
+                    icon.name: "arrow-up"
+                    enabled: index > 0
+                    onClicked: { seriesModel.move(index, index - 1, 1); syncOrder() }
+                }
+                QQC2.ToolButton {
+                    icon.name: "arrow-down"
+                    enabled: index < seriesModel.count - 1
+                    onClicked: { seriesModel.move(index, index + 1, 1); syncOrder() }
+                }
 
-                    QQC2.CheckBox {
-                        id: enabledBox
-                        text: "Show"
-                        checked: cfg["cfg_" + modelData.key + "Enabled"]
-                        onCheckedChanged: cfg["cfg_" + modelData.key + "Enabled"] = checked
-                    }
+                QQC2.CheckBox {
+                    id: enabledBox
+                    checked: cfg["cfg_" + model.key + "Enabled"]
+                    onCheckedChanged: cfg["cfg_" + model.key + "Enabled"] = checked
+                }
 
-                    KQuickControls.ColorButton {
-                        enabled: enabledBox.checked
-                        color: Qt.color(cfg["cfg_" + modelData.key + "Color"])
-                        onColorChanged: cfg["cfg_" + modelData.key + "Color"] = color.toString().toUpperCase()
-                    }
+                KQuickControls.ColorButton {
+                    enabled: enabledBox.checked
+                    color: Qt.color(cfg["cfg_" + model.key + "Color"])
+                    onColorChanged: cfg["cfg_" + model.key + "Color"] = color.toString().toUpperCase()
+                }
+
+                QQC2.Label {
+                    text: cfg.seriesNames[model.key] || model.key
+                    Layout.fillWidth: true
                 }
             }
         }

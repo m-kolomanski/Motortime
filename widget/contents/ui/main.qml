@@ -197,6 +197,10 @@ PlasmoidItem {
         function eventsForWeek(wi) {
             var wS = weekStartDate(wi)
             var wE = weekEndDate(wi)
+            var orderStr = Plasmoid.configuration.SeriesOrder
+            var orderKeys = (orderStr && orderStr.length > 0)
+                ? orderStr.split(",")
+                : ["F1","F2","F3","WEC","IMSA","NLS","GTWC","WRC"]
             var result = []
             for (var i = 0; i < events.length; i++) {
                 var ev = events[i]
@@ -218,18 +222,33 @@ PlasmoidItem {
                 })
             }
             result.sort(function(a,b) {
-                return a.startCol !== b.startCol ? a.startCol - b.startCol : b.spanCols - a.spanCols
+                var pa = orderKeys.indexOf(a.series)
+                var pb = orderKeys.indexOf(b.series)
+                if (pa !== pb) return pa - pb
+                if (a.startCol !== b.startCol) return a.startCol - b.startCol
+                return b.spanCols - a.spanCols
             })
-            var laneEnds = []
+            var lanes = []  // each lane: array of {startCol, endCol} intervals
             for (var j = 0; j < result.length; j++) {
                 var e = result[j]
                 var placed = false
-                for (var lane = 0; lane < laneEnds.length; lane++) {
-                    if (laneEnds[lane] < e.startCol) {
-                        laneEnds[lane] = e.endCol; e.lane = lane; placed = true; break
+                for (var lane = 0; lane < lanes.length; lane++) {
+                    var free = true
+                    for (var k = 0; k < lanes[lane].length; k++) {
+                        var occ = lanes[lane][k]
+                        if (e.startCol <= occ.endCol && occ.startCol <= e.endCol) {
+                            free = false; break
+                        }
+                    }
+                    if (free) {
+                        lanes[lane].push({ startCol: e.startCol, endCol: e.endCol })
+                        e.lane = lane; placed = true; break
                     }
                 }
-                if (!placed) { e.lane = laneEnds.length; laneEnds.push(e.endCol) }
+                if (!placed) {
+                    e.lane = lanes.length
+                    lanes.push([{ startCol: e.startCol, endCol: e.endCol }])
+                }
             }
             return result
         }

@@ -5,6 +5,7 @@
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
     <group name="General">
+        <entry name="SeriesOrder" type="String"><default>F1,F2,F3,WEC,IMSA,NLS,GTWC,WRC</default></entry>
         <entry name="F1Enabled"   type="Bool">  <default>true</default>    </entry>
         <entry name="F1Color"     type="String"><default>#E8002D</default>  </entry>
         <entry name="F2Enabled"   type="Bool">  <default>true</default>    </entry>
