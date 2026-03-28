@@ -24,14 +24,14 @@ PlasmoidItem {
 
         // ── Series colours ───────────────────────────────────────────────
         readonly property var seriesCfg: ({
-            "F1":   { color: "#E8002D" },
-            "F2":   { color: "#FF6B35" },
-            "F3":   { color: "#FFD166" },
-            "WEC":  { color: "#00B4D8" },
-            "IMSA": { color: "#06D6A0" },
-            "NLS":  { color: "#A663CC" },
-            "GTWC": { color: "#F4A261" },
-            "WRC":  { color: "#EF476F" }
+            "F1":   { color: "#E8002D", logo: "../assets/logos/f1.svg"   },
+            "F2":   { color: "#FF6B35", logo: "../assets/logos/f2.svg"   },
+            "F3":   { color: "#FFD166", logo: "../assets/logos/f3.svg"   },
+            "WEC":  { color: "#00B4D8", logo: "../assets/logos/wec.svg"  },
+            "IMSA": { color: "#06D6A0", logo: "../assets/logos/imsa.svg" },
+            "NLS":  { color: "#A663CC", logo: ""                         },
+            "GTWC": { color: "#F4A261", logo: ""                         },
+            "WRC":  { color: "#EF476F", logo: "../assets/logos/wrc.svg"  }
         })
 
         // ── Event data ───────────────────────────────────────────────────
@@ -465,20 +465,55 @@ PlasmoidItem {
                                     color: labelColor
                                 }
 
+                                // Right: series logo (or text fallback for NLS/GTWC)
+                                Item {
+                                    id: seriesTag
+                                    visible: barW > 56
+                                    anchors.right:          parent.right
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.rightMargin:    ev.clippedRight ? 14 : 5
+                                    height: weekRow.dynBarH * 2.2
+                                    width:  seriesTag.logoPath !== "" ? Math.min(weekRow.dynBarH * 6, 90) : fallbackText.implicitWidth
+
+                                    readonly property string logoPath: seriesCfg[ev.series] ? seriesCfg[ev.series].logo : ""
+
+                                    Image {
+                                        id: logoImg
+                                        visible:              seriesTag.logoPath !== ""
+                                        source:               seriesTag.logoPath !== "" ? Qt.resolvedUrl(seriesTag.logoPath) : ""
+                                        anchors.fill:         parent
+                                        anchors.margins:      6
+                                        fillMode:             Image.PreserveAspectFit
+                                        opacity:              0.85
+                                    }
+
+                                    Text {
+                                        id: fallbackText
+                                        visible:          seriesTag.logoPath === ""
+                                        anchors.centerIn: parent
+                                        text:             ev.series
+                                        font.pixelSize:   weekRow.dynFontPx
+                                        font.bold:        true
+                                        color:            labelColor
+                                        opacity:          0.75
+                                    }
+                                }
+
+                                // Left: flag + location | event type
                                 Text {
                                     anchors.verticalCenter: parent.verticalCenter
                                     anchors.left:           parent.left
-                                    anchors.right:          parent.right
-                                    anchors.leftMargin:     ev.clippedLeft  ? 12 : 4
-                                    anchors.rightMargin:    ev.clippedRight ? 12 : 4
+                                    anchors.right:          seriesTag.visible ? seriesTag.left : parent.right
+                                    anchors.leftMargin:     ev.clippedLeft ? 14 : 5
+                                    anchors.rightMargin:    4
                                     clip:  true
                                     elide: Text.ElideRight
                                     font.pixelSize: weekRow.dynFontPx
-                                    font.bold: true
-                                    color: labelColor
+                                    font.bold:      true
+                                    color:          labelColor
                                     text: barW > 160 ? ev.flag + " " + ev.location + " | " + ev.eventType
-                                        : barW > 72  ? ev.flag + " " + ev.location
-                                        : barW > 28  ? ev.flag
+                                        : barW > 80  ? ev.flag + " " + ev.location
+                                        : barW > 32  ? ev.flag
                                         :              ""
                                 }
                             }
