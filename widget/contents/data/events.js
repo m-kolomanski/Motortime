@@ -1,0 +1,67 @@
+.pragma library
+
+var events = [
+    { series: "IMSA", location: "Daytona",      event_type: "24h Race",   flag: "🇺🇸", start: "2026-01-22", end: "2026-01-25" },
+    { series: "WRC",  location: "Monte Carlo",  event_type: "Rally",      flag: "🇲🇨", start: "2026-01-22", end: "2026-01-25" },
+
+    { series: "WRC",  location: "Sweden",       event_type: "Rally",      flag: "🇸🇪", start: "2026-02-12", end: "2026-02-15" },
+
+    { series: "WEC",  location: "Qatar",        event_type: "Prologue",   flag: "🇶🇦", start: "2026-03-13", end: "2026-03-17" },
+    { series: "IMSA", location: "Sebring",      event_type: "12h Race",   flag: "🇺🇸", start: "2026-03-14", end: "2026-03-15" },
+    { series: "WRC",  location: "Mexico",       event_type: "Rally",      flag: "🇲🇽", start: "2026-03-19", end: "2026-03-23" },
+    { series: "F1",   location: "Melbourne",    event_type: "Grand Prix", flag: "🇦🇺", start: "2026-03-20", end: "2026-03-22" },
+    { series: "F2",   location: "Melbourne",    event_type: "Round 2",    flag: "🇦🇺", start: "2026-03-21", end: "2026-03-22" },
+    { series: "NLS",  location: "Nürburgring",  event_type: "Round 1",    flag: "🇩🇪", start: "2026-03-21", end: "2026-03-21" },
+    { series: "F1",   location: "Bahrain",      event_type: "Grand Prix", flag: "🇧🇭", start: "2026-03-27", end: "2026-03-29" },
+    { series: "F2",   location: "Bahrain",      event_type: "Round 3",    flag: "🇧🇭", start: "2026-03-28", end: "2026-03-29" },
+    { series: "F3",   location: "Bahrain",      event_type: "Round 3",    flag: "🇧🇭", start: "2026-03-28", end: "2026-03-29" },
+
+    { series: "WEC",  location: "Portimão",     event_type: "6h Race",    flag: "🇵🇹", start: "2026-04-04", end: "2026-04-05" },
+    { series: "GTWC", location: "Paul Ricard",  event_type: "3h Race",    flag: "🇫🇷", start: "2026-04-04", end: "2026-04-05" },
+    { series: "IMSA", location: "Mid-Ohio",     event_type: "4h Race",    flag: "🇺🇸", start: "2026-04-05", end: "2026-04-05" },
+    { series: "WRC",  location: "Croatia",      event_type: "Rally",      flag: "🇭🇷", start: "2026-04-09", end: "2026-04-12" },
+    { series: "F1",   location: "Shanghai",     event_type: "Grand Prix", flag: "🇨🇳", start: "2026-04-10", end: "2026-04-12" },
+    { series: "F2",   location: "Shanghai",     event_type: "Round 4",    flag: "🇨🇳", start: "2026-04-11", end: "2026-04-12" },
+    { series: "NLS",  location: "Nürburgring",  event_type: "Round 2",    flag: "🇩🇪", start: "2026-04-11", end: "2026-04-11" },
+    { series: "F1",   location: "Jeddah",       event_type: "Grand Prix", flag: "🇸🇦", start: "2026-04-17", end: "2026-04-19" },
+    { series: "F2",   location: "Jeddah",       event_type: "Round 5",    flag: "🇸🇦", start: "2026-04-18", end: "2026-04-19" },
+    { series: "WEC",  location: "Imola",        event_type: "6h Race",    flag: "🇮🇹", start: "2026-04-17", end: "2026-04-19" },
+    { series: "GTWC", location: "Magny-Cours",  event_type: "3h Race",    flag: "🇫🇷", start: "2026-04-24", end: "2026-04-26" },
+
+    { series: "F1",   location: "Miami",        event_type: "Grand Prix", flag: "🇺🇸", start: "2026-05-01", end: "2026-05-03" },
+    { series: "F2",   location: "Miami",        event_type: "Round 6",    flag: "🇺🇸", start: "2026-05-02", end: "2026-05-03" },
+    { series: "WEC",  location: "Spa",          event_type: "6h Race",    flag: "🇧🇪", start: "2026-05-08", end: "2026-05-10" },
+    { series: "NLS",  location: "Nürburgring",  event_type: "Round 3",    flag: "🇩🇪", start: "2026-05-09", end: "2026-05-09" },
+    { series: "WRC",  location: "Portugal",     event_type: "Rally",      flag: "🇵🇹", start: "2026-05-21", end: "2026-05-24" },
+    { series: "F1",   location: "Monaco",       event_type: "Grand Prix", flag: "🇲🇨", start: "2026-05-22", end: "2026-05-24" },
+    { series: "F2",   location: "Monaco",       event_type: "Round 7",    flag: "🇲🇨", start: "2026-05-23", end: "2026-05-24" },
+    { series: "NLS",  location: "Nürburgring",  event_type: "24h Race",   flag: "🇩🇪", start: "2026-05-23", end: "2026-05-25" },
+    { series: "GTWC", location: "Misano",       event_type: "3h Race",    flag: "🇮🇹", start: "2026-05-30", end: "2026-05-31" },
+
+    { series: "WRC",  location: "Sardinia",     event_type: "Rally",      flag: "🇮🇹", start: "2026-06-04", end: "2026-06-07" },
+    { series: "NLS",  location: "Nürburgring",  event_type: "Round 5",    flag: "🇩🇪", start: "2026-06-06", end: "2026-06-06" },
+    { series: "IMSA", location: "Detroit",      event_type: "2h40 Race",  flag: "🇺🇸", start: "2026-06-06", end: "2026-06-07" },
+    { series: "F1",   location: "Barcelona",    event_type: "Grand Prix", flag: "🇪🇸", start: "2026-06-12", end: "2026-06-14" },
+    { series: "F2",   location: "Barcelona",    event_type: "Round 8",    flag: "🇪🇸", start: "2026-06-13", end: "2026-06-14" },
+    { series: "WEC",  location: "Le Mans",      event_type: "24h Race",   flag: "🇫🇷", start: "2026-06-13", end: "2026-06-14" },
+    { series: "F1",   location: "Montreal",     event_type: "Grand Prix", flag: "🇨🇦", start: "2026-06-19", end: "2026-06-21" },
+    { series: "F2",   location: "Montreal",     event_type: "Round 9",    flag: "🇨🇦", start: "2026-06-20", end: "2026-06-21" },
+    { series: "IMSA", location: "Watkins Glen", event_type: "6h Race",    flag: "🇺🇸", start: "2026-06-26", end: "2026-06-28" },
+    { series: "GTWC", location: "Brands Hatch", event_type: "3h Race",    flag: "🇬🇧", start: "2026-06-27", end: "2026-06-28" },
+
+    { series: "WRC",  location: "Kenya",        event_type: "Rally",      flag: "🇰🇪", start: "2026-07-02", end: "2026-07-05" },
+    { series: "F1",   location: "Spielberg",    event_type: "Grand Prix", flag: "🇦🇹", start: "2026-07-03", end: "2026-07-05" },
+    { series: "NLS",  location: "Nürburgring",  event_type: "Round 6",    flag: "🇩🇪", start: "2026-07-04", end: "2026-07-04" },
+    { series: "WEC",  location: "São Paulo",    event_type: "6h Race",    flag: "🇧🇷", start: "2026-07-10", end: "2026-07-12" },
+    { series: "F1",   location: "Silverstone",  event_type: "Grand Prix", flag: "🇬🇧", start: "2026-07-17", end: "2026-07-19" },
+    { series: "F2",   location: "Silverstone",  event_type: "Round 10",   flag: "🇬🇧", start: "2026-07-18", end: "2026-07-19" },
+    { series: "IMSA", location: "Lime Rock",    event_type: "2h45 Race",  flag: "🇺🇸", start: "2026-07-18", end: "2026-07-19" },
+    { series: "GTWC", location: "Zandvoort",    event_type: "3h Race",    flag: "🇳🇱", start: "2026-07-18", end: "2026-07-19" },
+    { series: "F1",   location: "Budapest",     event_type: "Grand Prix", flag: "🇭🇺", start: "2026-07-31", end: "2026-08-02" },
+
+    { series: "NLS",  location: "Nürburgring",  event_type: "Round 7",    flag: "🇩🇪", start: "2026-08-01", end: "2026-08-01" },
+    { series: "WRC",  location: "Finland",      event_type: "Rally",      flag: "🇫🇮", start: "2026-08-06", end: "2026-08-09" },
+    { series: "IMSA", location: "Road America", event_type: "4h Race",    flag: "🇺🇸", start: "2026-08-07", end: "2026-08-09" },
+    { series: "F1",   location: "Spa",          event_type: "Grand Prix", flag: "🇧🇪", start: "2026-08-28", end: "2026-08-30" },
+    { series: "F2",   location: "Spa",          event_type: "Round 11",   flag: "🇧🇪", start: "2026-08-29", end: "2026-08-30" }
+]

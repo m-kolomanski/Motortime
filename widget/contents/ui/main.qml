@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
+import "../data/events.js" as EventData
 
 PlasmoidItem {
     preferredRepresentation: fullRepresentation
@@ -35,79 +36,27 @@ PlasmoidItem {
         })
 
         // ── Event data ───────────────────────────────────────────────────
-        readonly property var events: [
-            // ── January ──────────────────────────────────────────────────
-            { series:"IMSA", location:"Daytona",     eventType:"24h Race",   flag:"🇺🇸", start:makeDate(2026,1,22), end:makeDate(2026,1,25) },
-            { series:"WRC",  location:"Monte Carlo", eventType:"Rally",      flag:"🇲🇨", start:makeDate(2026,1,22), end:makeDate(2026,1,25) },
+        function parseDate(s) {
+            var p = s.split("-")
+            return makeDate(parseInt(p[0]), parseInt(p[1]), parseInt(p[2]))
+        }
 
-            // ── February ─────────────────────────────────────────────────
-            { series:"WRC",  location:"Sweden",      eventType:"Rally",      flag:"🇸🇪", start:makeDate(2026,2,12), end:makeDate(2026,2,15) },
-
-            // ── March ────────────────────────────────────────────────────
-            { series:"WEC",  location:"Qatar",       eventType:"Prologue",   flag:"🇶🇦", start:makeDate(2026,3,13), end:makeDate(2026,3,17) },
-            { series:"IMSA", location:"Sebring",     eventType:"12h Race",   flag:"🇺🇸", start:makeDate(2026,3,14), end:makeDate(2026,3,15) },
-            { series:"WRC",  location:"Mexico",      eventType:"Rally",      flag:"🇲🇽", start:makeDate(2026,3,19), end:makeDate(2026,3,23) },
-            { series:"F1",   location:"Melbourne",   eventType:"Grand Prix", flag:"🇦🇺", start:makeDate(2026,3,20), end:makeDate(2026,3,22) },
-            { series:"F2",   location:"Melbourne",   eventType:"Round 2",    flag:"🇦🇺", start:makeDate(2026,3,21), end:makeDate(2026,3,22) },
-            { series:"NLS",  location:"Nürburgring", eventType:"Round 1",    flag:"🇩🇪", start:makeDate(2026,3,21), end:makeDate(2026,3,21) },
-            { series:"F1",   location:"Bahrain",     eventType:"Grand Prix", flag:"🇧🇭", start:makeDate(2026,3,27), end:makeDate(2026,3,29) },
-            { series:"F2",   location:"Bahrain",     eventType:"Round 3",    flag:"🇧🇭", start:makeDate(2026,3,28), end:makeDate(2026,3,29) },
-            { series:"F3",   location:"Bahrain",     eventType:"Round 3",    flag:"🇧🇭", start:makeDate(2026,3,28), end:makeDate(2026,3,29) },
-
-            // ── April ────────────────────────────────────────────────────
-            { series:"WEC",  location:"Portimão",    eventType:"6h Race",    flag:"🇵🇹", start:makeDate(2026,4,4),  end:makeDate(2026,4,5)  },
-            { series:"GTWC", location:"Paul Ricard", eventType:"3h Race",    flag:"🇫🇷", start:makeDate(2026,4,4),  end:makeDate(2026,4,5)  },
-            { series:"IMSA", location:"Mid-Ohio",    eventType:"4h Race",    flag:"🇺🇸", start:makeDate(2026,4,5),  end:makeDate(2026,4,5)  },
-            { series:"WRC",  location:"Croatia",     eventType:"Rally",      flag:"🇭🇷", start:makeDate(2026,4,9),  end:makeDate(2026,4,12) },
-            { series:"F1",   location:"Shanghai",    eventType:"Grand Prix", flag:"🇨🇳", start:makeDate(2026,4,10), end:makeDate(2026,4,12) },
-            { series:"F2",   location:"Shanghai",    eventType:"Round 4",    flag:"🇨🇳", start:makeDate(2026,4,11), end:makeDate(2026,4,12) },
-            { series:"NLS",  location:"Nürburgring", eventType:"Round 2",    flag:"🇩🇪", start:makeDate(2026,4,11), end:makeDate(2026,4,11) },
-            { series:"F1",   location:"Jeddah",      eventType:"Grand Prix", flag:"🇸🇦", start:makeDate(2026,4,17), end:makeDate(2026,4,19) },
-            { series:"F2",   location:"Jeddah",      eventType:"Round 5",    flag:"🇸🇦", start:makeDate(2026,4,18), end:makeDate(2026,4,19) },
-            { series:"WEC",  location:"Imola",       eventType:"6h Race",    flag:"🇮🇹", start:makeDate(2026,4,17), end:makeDate(2026,4,19) },
-            { series:"GTWC", location:"Magny-Cours", eventType:"3h Race",    flag:"🇫🇷", start:makeDate(2026,4,24), end:makeDate(2026,4,26) },
-
-            // ── May ──────────────────────────────────────────────────────
-            { series:"F1",   location:"Miami",       eventType:"Grand Prix", flag:"🇺🇸", start:makeDate(2026,5,1),  end:makeDate(2026,5,3)  },
-            { series:"F2",   location:"Miami",       eventType:"Round 6",    flag:"🇺🇸", start:makeDate(2026,5,2),  end:makeDate(2026,5,3)  },
-            { series:"WEC",  location:"Spa",         eventType:"6h Race",    flag:"🇧🇪", start:makeDate(2026,5,8),  end:makeDate(2026,5,10) },
-            { series:"NLS",  location:"Nürburgring", eventType:"Round 3",    flag:"🇩🇪", start:makeDate(2026,5,9),  end:makeDate(2026,5,9)  },
-            { series:"F1",   location:"Monaco",      eventType:"Grand Prix", flag:"🇲🇨", start:makeDate(2026,5,22), end:makeDate(2026,5,24) },
-            { series:"F2",   location:"Monaco",      eventType:"Round 7",    flag:"🇲🇨", start:makeDate(2026,5,23), end:makeDate(2026,5,24) },
-            { series:"NLS",  location:"Nürburgring", eventType:"24h Race",   flag:"🇩🇪", start:makeDate(2026,5,23), end:makeDate(2026,5,25) },
-            { series:"WRC",  location:"Portugal",    eventType:"Rally",      flag:"🇵🇹", start:makeDate(2026,5,21), end:makeDate(2026,5,24) },
-            { series:"GTWC", location:"Misano",      eventType:"3h Race",    flag:"🇮🇹", start:makeDate(2026,5,30), end:makeDate(2026,5,31) },
-
-            // ── June ─────────────────────────────────────────────────────
-            { series:"WRC",  location:"Sardinia",    eventType:"Rally",      flag:"🇮🇹", start:makeDate(2026,6,4),  end:makeDate(2026,6,7)  },
-            { series:"NLS",  location:"Nürburgring", eventType:"Round 4",    flag:"🇩🇪", start:makeDate(2026,6,6),  end:makeDate(2026,6,6)  },
-            { series:"IMSA", location:"Detroit",     eventType:"2h40 Race",  flag:"🇺🇸", start:makeDate(2026,6,6),  end:makeDate(2026,6,7)  },
-            { series:"F1",   location:"Barcelona",   eventType:"Grand Prix", flag:"🇪🇸", start:makeDate(2026,6,12), end:makeDate(2026,6,14) },
-            { series:"F2",   location:"Barcelona",   eventType:"Round 8",    flag:"🇪🇸", start:makeDate(2026,6,13), end:makeDate(2026,6,14) },
-            { series:"WEC",  location:"Le Mans",     eventType:"24h Race",   flag:"🇫🇷", start:makeDate(2026,6,13), end:makeDate(2026,6,14) },
-            { series:"F1",   location:"Montreal",    eventType:"Grand Prix", flag:"🇨🇦", start:makeDate(2026,6,19), end:makeDate(2026,6,21) },
-            { series:"F2",   location:"Montreal",    eventType:"Round 9",    flag:"🇨🇦", start:makeDate(2026,6,20), end:makeDate(2026,6,21) },
-            { series:"IMSA", location:"Watkins Glen",eventType:"6h Race",    flag:"🇺🇸", start:makeDate(2026,6,26), end:makeDate(2026,6,28) },
-            { series:"GTWC", location:"Brands Hatch",eventType:"3h Race",    flag:"🇬🇧", start:makeDate(2026,6,27), end:makeDate(2026,6,28) },
-
-            // ── July ─────────────────────────────────────────────────────
-            { series:"WRC",  location:"Kenya",       eventType:"Rally",      flag:"🇰🇪", start:makeDate(2026,7,2),  end:makeDate(2026,7,5)  },
-            { series:"NLS",  location:"Nürburgring", eventType:"Round 5",    flag:"🇩🇪", start:makeDate(2026,7,4),  end:makeDate(2026,7,4)  },
-            { series:"F1",   location:"Spielberg",   eventType:"Grand Prix", flag:"🇦🇹", start:makeDate(2026,7,3),  end:makeDate(2026,7,5)  },
-            { series:"F1",   location:"Silverstone", eventType:"Grand Prix", flag:"🇬🇧", start:makeDate(2026,7,17), end:makeDate(2026,7,19) },
-            { series:"F2",   location:"Silverstone", eventType:"Round 10",   flag:"🇬🇧", start:makeDate(2026,7,18), end:makeDate(2026,7,19) },
-            { series:"IMSA", location:"Lime Rock",   eventType:"2h45 Race",  flag:"🇺🇸", start:makeDate(2026,7,18), end:makeDate(2026,7,19) },
-            { series:"GTWC", location:"Zandvoort",   eventType:"3h Race",    flag:"🇳🇱", start:makeDate(2026,7,18), end:makeDate(2026,7,19) },
-            { series:"WEC",  location:"São Paulo",   eventType:"6h Race",    flag:"🇧🇷", start:makeDate(2026,7,10), end:makeDate(2026,7,12) },
-            { series:"F1",   location:"Budapest",    eventType:"Grand Prix", flag:"🇭🇺", start:makeDate(2026,7,31), end:makeDate(2026,8,2)  },
-
-            // ── August ───────────────────────────────────────────────────
-            { series:"NLS",  location:"Nürburgring", eventType:"Round 6",    flag:"🇩🇪", start:makeDate(2026,8,1),  end:makeDate(2026,8,1)  },
-            { series:"WRC",  location:"Finland",     eventType:"Rally",      flag:"🇫🇮", start:makeDate(2026,8,6),  end:makeDate(2026,8,9)  },
-            { series:"IMSA", location:"Road America",eventType:"4h Race",    flag:"🇺🇸", start:makeDate(2026,8,7),  end:makeDate(2026,8,9)  },
-            { series:"F1",   location:"Spa",         eventType:"Grand Prix", flag:"🇧🇪", start:makeDate(2026,8,28), end:makeDate(2026,8,30) },
-            { series:"F2",   location:"Spa",         eventType:"Round 11",   flag:"🇧🇪", start:makeDate(2026,8,29), end:makeDate(2026,8,30) }
-        ]
+        readonly property var events: {
+            var raw = EventData.events
+            var loaded = []
+            for (var i = 0; i < raw.length; i++) {
+                var ev = raw[i]
+                loaded.push({
+                    series:    ev.series,
+                    location:  ev.location,
+                    eventType: ev.event_type,
+                    flag:      ev.flag,
+                    start:     parseDate(ev.start),
+                    end:       parseDate(ev.end)
+                })
+            }
+            return loaded
+        }
 
         function makeDate(y, m, d) {
             var dt = new Date(y, m - 1, d)
