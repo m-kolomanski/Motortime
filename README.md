@@ -1,5 +1,8 @@
 # Motortime
 
+> [!WARNING]
+> This thing is vide-coded. I needed a working custom widget for my own purposes. The code quality is not a factor. Take it for what it is or leave it.
+
 A KDE Plasma desktop widget that displays a colorful, always-visible motorsport calendar — showing all major racing series in a single glanceable view.
 
 ## What it does
