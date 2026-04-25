@@ -116,19 +116,19 @@ PlasmoidItem {
 
         // ── Series helpers ────────────────────────────────────────────────
         readonly property var defaultColors: ({
-            "F1":            "#E8002D",
-            "F2":            "#FF6B35",
-            "F3":            "#FFD166",
-            "FE":            "#00D2FF",
-            "WEC":           "#00B4D8",
+            "F1":            "#F0F0F0",
+            "F2":            "#001F3F",
+            "F3":            "#888888",
+            "FE":            "#00CED1",
+            "WEC":           "#1B6FD8",
             "IGTC":          "#9D4EDD",
-            "IMSA":          "#06D6A0",
-            "NLS":           "#A663CC",
-            "GTWCEurope":    "#F4A261",
-            "GTWCAmerica":   "#E76F51",
-            "GTWCAsia":      "#F4C843",
-            "GTWCAustralia": "#52B788",
-            "WRC":           "#EF476F"
+            "IMSA":          "#5A4535",
+            "NLS":           "#111111",
+            "GTWCEurope":    "#0891B2",
+            "GTWCAmerica":   "#E11D48",
+            "GTWCAsia":      "#0F766E",
+            "GTWCAustralia": "#16A34A",
+            "WRC":           "#FF6D00"
         })
 
         function seriesKey(s)     { return s.replace(/ /g, "") }

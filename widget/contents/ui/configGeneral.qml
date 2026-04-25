@@ -10,31 +10,31 @@ Item {
 
     property string cfg_SeriesOrder:            "F1,F2,F3,FE,WEC,IGTC,IMSA,NLS,GTWCEurope,GTWCAmerica,GTWCAsia,GTWCAustralia,WRC"
     property bool   cfg_F1Enabled:              true
-    property string cfg_F1Color:                "#E8002D"
+    property string cfg_F1Color:                "#F0F0F0"
     property bool   cfg_F2Enabled:              true
-    property string cfg_F2Color:                "#FF6B35"
+    property string cfg_F2Color:                "#001F3F"
     property bool   cfg_F3Enabled:              true
-    property string cfg_F3Color:                "#FFD166"
+    property string cfg_F3Color:                "#888888"
     property bool   cfg_FEEnabled:              true
-    property string cfg_FEColor:                "#00D2FF"
+    property string cfg_FEColor:                "#00CED1"
     property bool   cfg_WECEnabled:             true
-    property string cfg_WECColor:               "#00B4D8"
+    property string cfg_WECColor:               "#1B6FD8"
     property bool   cfg_IGTCEnabled:            true
     property string cfg_IGTCColor:              "#9D4EDD"
     property bool   cfg_IMSAEnabled:            true
-    property string cfg_IMSAColor:              "#06D6A0"
+    property string cfg_IMSAColor:              "#5A4535"
     property bool   cfg_NLSEnabled:             true
-    property string cfg_NLSColor:               "#A663CC"
+    property string cfg_NLSColor:               "#111111"
     property bool   cfg_GTWCEuropeEnabled:      true
-    property string cfg_GTWCEuropeColor:        "#F4A261"
+    property string cfg_GTWCEuropeColor:        "#0891B2"
     property bool   cfg_GTWCAmericaEnabled:     true
-    property string cfg_GTWCAmericaColor:       "#E76F51"
+    property string cfg_GTWCAmericaColor:       "#E11D48"
     property bool   cfg_GTWCAsiaEnabled:        true
-    property string cfg_GTWCAsiaColor:          "#F4C843"
+    property string cfg_GTWCAsiaColor:          "#0F766E"
     property bool   cfg_GTWCAustraliaEnabled:   true
-    property string cfg_GTWCAustraliaColor:     "#52B788"
+    property string cfg_GTWCAustraliaColor:     "#16A34A"
     property bool   cfg_WRCEnabled:             true
-    property string cfg_WRCColor:               "#EF476F"
+    property string cfg_WRCColor:               "#FF6D00"
     property int    cfg_ScrollSensitivity:      240
 
     readonly property var seriesNames: ({
