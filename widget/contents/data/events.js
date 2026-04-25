@@ -1,6 +1,6 @@
 .pragma library
 
-// Generated: 2026-04-25T12:38:31Z
+// Generated: 2026-04-25T12:51:07Z
 
 var events = [
     { series: "FE", location: "Mexico City", event_type: "ePrix", flag: "\ud83c\uddf2\ud83c\uddfd", start: "2026-01-10", end: "2026-01-10" },
@@ -11,16 +11,20 @@ var events = [
     { series: "FE", location: "Jeddah", event_type: "Double ePrix", flag: "\ud83c\uddf8\ud83c\udde6", start: "2026-02-13", end: "2026-02-14" },
     { series: "F2", location: "Melbourne", event_type: "Sprint & Feature", flag: "\ud83c\udde6\ud83c\uddfa", start: "2026-03-06", end: "2026-03-08" },
     { series: "F3", location: "Melbourne", event_type: "Sprint & Feature", flag: "\ud83c\udde6\ud83c\uddfa", start: "2026-03-06", end: "2026-03-08" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS1", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-03-12", end: "2026-03-14" },
     { series: "WRC", location: "Kenya", event_type: "Rally", flag: "\ud83c\uddf0\ud83c\uddea", start: "2026-03-12", end: "2026-03-15" },
     { series: "IMSA", location: "Sebring", event_type: "12 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-03-19", end: "2026-03-21" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS2", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-03-19", end: "2026-03-21" },
     { series: "FE", location: "Madrid", event_type: "ePrix", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-03-21", end: "2026-03-21" },
     { series: "GTWC America", location: "Sonoma", event_type: "3 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-03-26", end: "2026-03-29" },
     { series: "GTWC Australia", location: "Phillip Island", event_type: "Race Weekend", flag: "\ud83c\udde6\ud83c\uddfa", start: "2026-03-26", end: "2026-03-29" },
     { series: "F1", location: "Suzuka", event_type: "Grand Prix", flag: "\ud83c\uddef\ud83c\uddf5", start: "2026-03-27", end: "2026-03-29" },
     { series: "GTWC Asia", location: "Sepang", event_type: "Race Weekend", flag: "\ud83c\uddf2\ud83c\uddfe", start: "2026-04-02", end: "2026-04-05" },
     { series: "GTWC Europe", location: "Paul Ricard", event_type: "6 Hours", flag: "\ud83c\uddeb\ud83c\uddf7", start: "2026-04-09", end: "2026-04-12" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS3", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-04-09", end: "2026-04-11" },
     { series: "WRC", location: "Croatia", event_type: "Rally", flag: "\ud83c\udded\ud83c\uddf7", start: "2026-04-09", end: "2026-04-12" },
     { series: "IMSA", location: "Long Beach", event_type: "1h 40min", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-04-16", end: "2026-04-18" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS4 & NLS5", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-04-16", end: "2026-04-19" },
     { series: "WEC", location: "Imola", event_type: "6 Hours", flag: "\ud83c\uddee\ud83c\uddf9", start: "2026-04-16", end: "2026-04-19" },
     { series: "GTWC America", location: "Austin", event_type: "3 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-04-23", end: "2026-04-26" },
     { series: "WRC", location: "Las Palmas", event_type: "Rally", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-04-23", end: "2026-04-26" },
@@ -49,6 +53,7 @@ var events = [
     { series: "F1", location: "Barcelona", event_type: "Grand Prix", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-06-12", end: "2026-06-14" },
     { series: "F2", location: "Barcelona", event_type: "Sprint & Feature", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-06-12", end: "2026-06-14" },
     { series: "F3", location: "Barcelona", event_type: "Sprint & Feature", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-06-12", end: "2026-06-14" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS6", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-06-18", end: "2026-06-20" },
     { series: "FE", location: "Sanya", event_type: "ePrix", flag: "\ud83c\udde8\ud83c\uddf3", start: "2026-06-20", end: "2026-06-20" },
     { series: "GTWC Europe", location: "Spa", event_type: "24 Hours", flag: "\ud83c\udde7\ud83c\uddea", start: "2026-06-25", end: "2026-06-28" },
     { series: "IMSA", location: "Watkins Glen", event_type: "6 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-06-25", end: "2026-06-28" },
@@ -74,6 +79,7 @@ var events = [
     { series: "FE", location: "Tokyo", event_type: "Double ePrix", flag: "\ud83c\uddef\ud83c\uddf5", start: "2026-07-25", end: "2026-07-26" },
     { series: "GTWC Europe", location: "Magny-Cours", event_type: "Sprint", flag: "\ud83c\uddeb\ud83c\uddf7", start: "2026-07-30", end: "2026-08-02" },
     { series: "IMSA", location: "Road America", event_type: "6 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-07-30", end: "2026-08-02" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS7", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-07-30", end: "2026-08-01" },
     { series: "WRC", location: "Finland", event_type: "Rally", flag: "\ud83c\uddeb\ud83c\uddee", start: "2026-07-30", end: "2026-08-02" },
     { series: "FE", location: "London", event_type: "Double ePrix", flag: "\ud83c\uddec\ud83c\udde7", start: "2026-08-15", end: "2026-08-16" },
     { series: "IMSA", location: "VIR", event_type: "2h 40min", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-08-20", end: "2026-08-23" },
@@ -86,6 +92,7 @@ var events = [
     { series: "F1", location: "Monza", event_type: "Grand Prix", flag: "\ud83c\uddee\ud83c\uddf9", start: "2026-09-04", end: "2026-09-06" },
     { series: "F2", location: "Monza", event_type: "Sprint & Feature", flag: "\ud83c\uddee\ud83c\uddf9", start: "2026-09-04", end: "2026-09-06" },
     { series: "F3", location: "Monza", event_type: "Sprint & Feature", flag: "\ud83c\uddee\ud83c\uddf9", start: "2026-09-04", end: "2026-09-06" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS8 & NLS9", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-09-10", end: "2026-09-13" },
     { series: "WRC", location: "Chile", event_type: "Rally", flag: "\ud83c\udde8\ud83c\uddf1", start: "2026-09-10", end: "2026-09-13" },
     { series: "F1", location: "Barcelona", event_type: "Grand Prix", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-09-11", end: "2026-09-13" },
     { series: "F2", location: "Madrid", event_type: "Sprint & Feature", flag: "\ud83c\uddea\ud83c\uddf8", start: "2026-09-11", end: "2026-09-13" },
@@ -102,6 +109,7 @@ var events = [
     { series: "IMSA", location: "Road Atlanta", event_type: "10 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-10-01", end: "2026-10-03" },
     { series: "WRC", location: "Italy", event_type: "Rally", flag: "\ud83c\uddee\ud83c\uddf9", start: "2026-10-01", end: "2026-10-04" },
     { series: "GTWC America", location: "Indianapolis", event_type: "8 Hours", flag: "\ud83c\uddfa\ud83c\uddf8", start: "2026-10-08", end: "2026-10-11" },
+    { series: "NLS", location: "N\u00fcrburgring", event_type: "NLS10", flag: "\ud83c\udde9\ud83c\uddea", start: "2026-10-08", end: "2026-10-10" },
     { series: "F1", location: "Singapore", event_type: "Sprint Weekend", flag: "\ud83c\uddf8\ud83c\uddec", start: "2026-10-09", end: "2026-10-11" },
     { series: "GTWC Europe", location: "Portim\u00e3o", event_type: "3 Hours", flag: "\ud83c\uddf5\ud83c\uddf9", start: "2026-10-15", end: "2026-10-18" },
     { series: "WEC", location: "Lusail", event_type: "1812 KM", flag: "\ud83c\uddf6\ud83c\udde6", start: "2026-10-22", end: "2026-10-24" },
