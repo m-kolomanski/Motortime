@@ -32,5 +32,6 @@
         <entry name="GTWCAustraliaColor"    type="String"><default>#52B788</default>  </entry>
         <entry name="WRCEnabled"            type="Bool">  <default>true</default>    </entry>
         <entry name="WRCColor"              type="String"><default>#EF476F</default>  </entry>
+        <entry name="ScrollSensitivity"     type="Int">   <default>240</default>      </entry>
     </group>
 </kcfg>

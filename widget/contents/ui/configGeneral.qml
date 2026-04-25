@@ -35,6 +35,7 @@ Item {
     property string cfg_GTWCAustraliaColor:     "#52B788"
     property bool   cfg_WRCEnabled:             true
     property string cfg_WRCColor:               "#EF476F"
+    property int    cfg_ScrollSensitivity:      240
 
     readonly property var seriesNames: ({
         "F1":            "Formula 1",
@@ -110,6 +111,29 @@ Item {
                     text: cfg.seriesNames[model.key] || model.key
                     Layout.fillWidth: true
                 }
+            }
+        }
+
+        Kirigami.Separator { Layout.fillWidth: true; Layout.topMargin: 4 }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 6
+
+            QQC2.Label { text: "Scroll sensitivity" }
+
+            QQC2.Slider {
+                id: scrollSlider
+                Layout.fillWidth: true
+                from: 360; to: 120; stepSize: 120
+                value: cfg_ScrollSensitivity
+                onMoved: cfg_ScrollSensitivity = value
+            }
+
+            QQC2.Label {
+                text: scrollSlider.value <= 120 ? "High"
+                    : scrollSlider.value <= 240 ? "Medium"
+                    :                             "Low"
             }
         }
     }

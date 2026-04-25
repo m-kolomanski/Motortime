@@ -537,10 +537,19 @@ PlasmoidItem {
             }
         }
 
-        // Mouse wheel scrolling
-        WheelHandler {
-            onWheel: function(event) {
-                weekOffset += event.angleDelta.y < 0 ? 1 : -1
+        // Mouse wheel scrolling — accumulate delta, step per 120 units
+        property real _wheelAccum: 0
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            onWheel: function(wheel) {
+                parent._wheelAccum += wheel.angleDelta.y
+                var threshold = Plasmoid.configuration.ScrollSensitivity || 180
+                var steps = Math.trunc(parent._wheelAccum / threshold)
+                if (steps !== 0) {
+                    weekOffset -= steps
+                    parent._wheelAccum -= steps * threshold
+                }
             }
         }
     }
