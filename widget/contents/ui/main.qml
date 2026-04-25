@@ -8,10 +8,15 @@ PlasmoidItem {
     preferredRepresentation: fullRepresentation
 
     fullRepresentation: Item {
+        id: root
         Layout.minimumWidth:    580
         Layout.minimumHeight:   520
         Layout.preferredWidth:  820
         Layout.preferredHeight: 620
+
+        // Bar height tied to widget height — consistent size regardless of week count.
+        // Fixed topOffset means extra row space (fewer weeks) goes to more visible lanes.
+        readonly property real barH: Math.max(16, Math.min(52, root.height * 0.048))
 
         // ── Layout constants ─────────────────────────────────────────────
         readonly property int navH:      30
@@ -325,16 +330,16 @@ PlasmoidItem {
 
                     Layout.fillWidth:    true
                     Layout.fillHeight:   true
-                    Layout.minimumHeight: 70
+                    Layout.minimumHeight: 50
 
                     readonly property bool isPast:    weekEndDate(weekRow.weekIdx) < today
                     readonly property bool isCurrent: weekRow.weekIdx === currentGridRow
                     readonly property bool isNext:    currentGridRow >= 0 && weekRow.weekIdx === currentGridRow + 1
 
-                    // Dynamic bar sizing based on actual row height
-                    readonly property real dynBarTopOffset: Math.max(18, height * 0.22)
-                    readonly property real dynBarH:         Math.max(14, height * 0.17)
-                    readonly property real dynFontPx:       Math.max(10, Math.min(14, height * 0.13))
+                    // topOffset fixed; barH from widget height → consistent size, more lanes when fewer weeks
+                    readonly property real dynBarTopOffset: 30
+                    readonly property real dynBarH:         root.barH
+                    readonly property real dynFontPx:       Math.max(10, Math.min(14, root.barH * 0.6))
 
                     // Row background: current week full highlight, next week subtle
                     Rectangle {
