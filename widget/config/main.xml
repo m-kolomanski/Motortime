@@ -33,5 +33,6 @@
         <entry name="WRCEnabled"            type="Bool">  <default>true</default>    </entry>
         <entry name="WRCColor"              type="String"><default>#FF6D00</default>  </entry>
         <entry name="ScrollSensitivity"     type="Int">   <default>240</default>      </entry>
+        <entry name="WeekCount"             type="Int">   <default>4</default>        </entry>
     </group>
 </kcfg>

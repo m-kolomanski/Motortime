@@ -36,6 +36,7 @@ Item {
     property bool   cfg_WRCEnabled:             true
     property string cfg_WRCColor:               "#FF6D00"
     property int    cfg_ScrollSensitivity:      240
+    property int    cfg_WeekCount:              4
 
     readonly property var seriesNames: ({
         "F1":            "Formula 1",
@@ -134,6 +135,19 @@ Item {
                 text: scrollSlider.value <= 120 ? "High"
                     : scrollSlider.value <= 240 ? "Medium"
                     :                             "Low"
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 6
+
+            QQC2.Label { text: "Weeks to display" }
+
+            QQC2.SpinBox {
+                from: 1; to: 8
+                value: cfg_WeekCount
+                onValueModified: cfg_WeekCount = value
             }
         }
     }

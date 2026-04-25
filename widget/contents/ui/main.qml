@@ -103,8 +103,10 @@ PlasmoidItem {
         function daysDiff(a, b)    { return Math.round((b - a) / 86400000) }
 
         // Which grid row index contains today (-1 if not visible)
+        readonly property int weekCount: Plasmoid.configuration.WeekCount || 4
+
         readonly property int currentGridRow: {
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < weekCount; i++) {
                 if (today >= weekStartDate(i) && today <= weekEndDate(i)) return i
             }
             return -1
@@ -113,7 +115,7 @@ PlasmoidItem {
         function navLabel() {
             var s = gridStart
             var e = new Date(gridStart)
-            e.setDate(e.getDate() + 27)
+            e.setDate(e.getDate() + weekCount * 7 - 1)
             if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear())
                 return Qt.formatDate(s, "MMMM yyyy")
             if (s.getFullYear() === e.getFullYear())
@@ -313,9 +315,9 @@ PlasmoidItem {
                 opacity: 0.15
             }
 
-            // ── 4 week rows ───────────────────────────────────────────────
+            // ── week rows ─────────────────────────────────────────────────
             Repeater {
-                model: 4
+                model: weekCount
                 delegate: Item {
                     id: weekRow
                     readonly property int weekIdx: index
