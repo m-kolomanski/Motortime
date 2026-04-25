@@ -12,13 +12,15 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from series import f1, wec, wrc
+from series import f1, f2, f3, wec, wrc
 
 SERIES_SCRAPERS = {
     "F1":  f1.fetch,
+    "F2":  f2.fetch,
+    "F3":  f3.fetch,
     "WEC": wec.fetch,
     "WRC": wrc.fetch,
-    # F2, F3, IMSA, NLS, GTWC — to be added
+    # IMSA, NLS, GTWC — to be added
 }
 
 DEFAULT_OUT = Path(__file__).parent.parent / "widget" / "contents" / "data" / "events.js"
