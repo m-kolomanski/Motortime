@@ -8,12 +8,9 @@ Summary format: 'F1 Australian GP - Race'
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import date, timedelta, timezone
-
-import httpx
-from icalendar import Calendar
 
 from utils.flags import resolve
+from utils.ical import event_dates, fetch_calendar
 
 ICAL_URL = "https://better-f1-calendar.vercel.app/api/calendar.ics"
 
@@ -38,21 +35,12 @@ def _parse_summary(summary: str) -> tuple[str, str] | None:
     return gp_name.strip(), session.strip().lower()
 
 
-def _to_date(dt_value) -> date:
-    if hasattr(dt_value, "date"):
-        return dt_value.astimezone(timezone.utc).date()
-    return dt_value
-
-
 def fetch(year: int) -> list[dict]:
     """
     Fetch and parse the F1 iCal feed for *year*.
     Returns a list of event dicts compatible with events.js.
     """
-    response = httpx.get(ICAL_URL, follow_redirects=True, timeout=30)
-    response.raise_for_status()
-
-    cal = Calendar.from_ical(response.content)
+    cal = fetch_calendar(ICAL_URL)
 
     weekends: dict[str, dict] = defaultdict(lambda: {
         "starts": [], "ends": [], "sessions": [],
@@ -71,10 +59,7 @@ def fetch(year: int) -> list[dict]:
         if session not in _WEEKEND_SESSIONS:
             continue
 
-        dt_start = _to_date(component.get("DTSTART").dt)
-        dt_end   = _to_date(component.get("DTEND").dt)
-        if not hasattr(component.get("DTEND").dt, "hour"):
-            dt_end = dt_end - timedelta(days=1)
+        dt_start, dt_end = event_dates(component)
 
         if dt_start.year != year:
             continue

@@ -9,12 +9,10 @@ Summary format (2026+): 'FIA WEC | 6 Hours of Spa-Francorchamps'
 from __future__ import annotations
 
 import re
-from datetime import date, timedelta, timezone
-
-import httpx
-from icalendar import Calendar
+from datetime import date, timedelta
 
 from utils.flags import resolve
+from utils.ical import event_dates, fetch_calendar
 
 ICAL_URL = (
     "https://calendar.google.com/calendar/ical/"
@@ -37,12 +35,6 @@ def _parse_event_type(name: str) -> str:
     return "Race"
 
 
-def _to_date(dt_value) -> date:
-    if hasattr(dt_value, "date"):
-        return dt_value.astimezone(timezone.utc).date()
-    return dt_value
-
-
 def _thursday_of_week(d: date) -> date:
     """Return the Thursday on or before *d* (WEC weekends start Thursday)."""
     return d - timedelta(days=(d.weekday() - 3) % 7)
@@ -53,10 +45,7 @@ def fetch(year: int) -> list[dict]:
     Fetch and parse the WEC iCal feed for *year*.
     Returns a list of event dicts compatible with events.js.
     """
-    response = httpx.get(ICAL_URL, follow_redirects=True, timeout=30)
-    response.raise_for_status()
-
-    cal = Calendar.from_ical(response.content)
+    cal = fetch_calendar(ICAL_URL)
     events = []
 
     for component in cal.walk():
@@ -80,12 +69,7 @@ def fetch(year: int) -> list[dict]:
         if any(kw in name.lower() for kw in _SKIP_KEYWORDS):
             continue
 
-        dt_start = _to_date(component.get("DTSTART").dt)
-        dt_end = _to_date(component.get("DTEND").dt)
-
-        # iCal all-day DTEND is exclusive
-        if not hasattr(component.get("DTEND").dt, "hour"):
-            dt_end = dt_end - timedelta(days=1)
+        dt_start, dt_end = event_dates(component)
 
         if dt_start.year != year:
             continue
