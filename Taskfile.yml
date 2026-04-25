@@ -1,0 +1,17 @@
+version: "3"
+
+vars:
+  WIDGET_DATA: "{{.HOME}}/.local/share/plasma/plasmoids/com.github.motortime/contents/data/events.js"
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task --list
+
+  update:
+    desc: Scrape motorsport calendars and reload the Plasma widget
+    dir: scraper
+    cmds:
+      - uv run main.py --out "{{.WIDGET_DATA}}"
+      - kquitapp6 plasmashell && kstart plasmashell
