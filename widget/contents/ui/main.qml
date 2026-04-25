@@ -25,12 +25,19 @@ PlasmoidItem {
 
         // ── Series logos (colors come from config) ───────────────────────
         readonly property var seriesLogos: ({
-            "F1":   "../assets/logos/f1.svg",
-            "F2":   "../assets/logos/f2.svg",
-            "F3":   "../assets/logos/f3.svg",
-            "WEC":  "../assets/logos/wec.svg",
-            "IMSA": "../assets/logos/imsa.svg",
-            "WRC":  "../assets/logos/wrc.svg"
+            "F1":              "../assets/logos/f1.svg",
+            "F2":              "../assets/logos/f2.svg",
+            "F3":              "../assets/logos/f3.svg",
+            "FE":              "../assets/logos/fe.svg",
+            "WEC":             "../assets/logos/wec.svg",
+            "IGTC":            "../assets/logos/igtc.svg",
+            "IMSA":            "../assets/logos/imsa.svg",
+            "NLS":             "../assets/logos/nls.svg",
+            "GTWCEurope":      "../assets/logos/gtwc.svg",
+            "GTWCAmerica":     "../assets/logos/gtwc.svg",
+            "GTWCAsia":        "../assets/logos/gtwc.svg",
+            "GTWCAustralia":   "../assets/logos/gtwc.svg",
+            "WRC":             "../assets/logos/wrc.svg"
         })
 
         // ── Event data ───────────────────────────────────────────────────
@@ -125,7 +132,7 @@ PlasmoidItem {
             "IMSA":          "#5A4535",
             "NLS":           "#111111",
             "GTWCEurope":    "#0891B2",
-            "GTWCAmerica":   "#E11D48",
+            "GTWCAmerica":   "#7C2D12",
             "GTWCAsia":      "#0F766E",
             "GTWCAustralia": "#16A34A",
             "WRC":           "#FF6D00"
@@ -466,7 +473,7 @@ PlasmoidItem {
                                     height: weekRow.dynBarH * 2.2
                                     width:  seriesTag.logoPath !== "" ? Math.min(weekRow.dynBarH * 6, 90) : fallbackText.implicitWidth
 
-                                    readonly property string logoPath: seriesLogos[ev.series] || ""
+                                    readonly property string logoPath: seriesLogos[seriesKey(ev.series)] || ""
 
                                     Image {
                                         id: logoImg

@@ -28,7 +28,7 @@ Item {
     property bool   cfg_GTWCEuropeEnabled:      true
     property string cfg_GTWCEuropeColor:        "#0891B2"
     property bool   cfg_GTWCAmericaEnabled:     true
-    property string cfg_GTWCAmericaColor:       "#E11D48"
+    property string cfg_GTWCAmericaColor:       "#7C2D12"
     property bool   cfg_GTWCAsiaEnabled:        true
     property string cfg_GTWCAsiaColor:          "#0F766E"
     property bool   cfg_GTWCAustraliaEnabled:   true

@@ -25,7 +25,7 @@
         <entry name="GTWCEuropeEnabled"     type="Bool">  <default>true</default>    </entry>
         <entry name="GTWCEuropeColor"       type="String"><default>#0891B2</default>  </entry>
         <entry name="GTWCAmericaEnabled"    type="Bool">  <default>true</default>    </entry>
-        <entry name="GTWCAmericaColor"      type="String"><default>#E11D48</default>  </entry>
+        <entry name="GTWCAmericaColor"      type="String"><default>#7C2D12</default>  </entry>
         <entry name="GTWCAsiaEnabled"       type="Bool">  <default>true</default>    </entry>
         <entry name="GTWCAsiaColor"         type="String"><default>#0F766E</default>  </entry>
         <entry name="GTWCAustraliaEnabled"  type="Bool">  <default>true</default>    </entry>
