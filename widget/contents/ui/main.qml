@@ -72,7 +72,7 @@ PlasmoidItem {
         readonly property var gridStart: {
             var d   = new Date(today)
             var dow = d.getDay()
-            d.setDate(d.getDate() + (dow === 0 ? -6 : 1 - dow) - 7 + weekOffset * 7)
+            d.setDate(d.getDate() + (dow === 0 ? -6 : 1 - dow) + weekOffset * 7)
             return d
         }
 
