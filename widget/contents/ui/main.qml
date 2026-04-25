@@ -251,7 +251,6 @@ PlasmoidItem {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: weekOffset--
-                    cursorShape: Qt.PointingHandCursor
                 }
             }
 
@@ -290,7 +289,6 @@ PlasmoidItem {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked: { weekOffset = savedWeekOffset; isZoomed = false }
-                        cursorShape: Qt.PointingHandCursor
                     }
                 }
 
@@ -316,7 +314,6 @@ PlasmoidItem {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked: weekOffset = 0
-                        cursorShape: Qt.PointingHandCursor
                     }
                 }
             }
@@ -485,7 +482,6 @@ PlasmoidItem {
                                 id: moreArea
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                cursorShape:  Qt.PointingHandCursor
                                 onClicked: {
                                     savedWeekOffset = weekOffset
                                     weekOffset = weekOffset + weekRow.weekIdx
@@ -616,7 +612,6 @@ PlasmoidItem {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: weekOffset++
-                    cursorShape: Qt.PointingHandCursor
                 }
             }
         }
