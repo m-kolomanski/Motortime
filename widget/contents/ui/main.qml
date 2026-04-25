@@ -424,6 +424,28 @@ PlasmoidItem {
                         id: overlay
                         anchors.fill: parent
 
+                        readonly property int hiddenCount: {
+                            var n = 0
+                            for (var i = 0; i < weekRow.weekEvs.length; i++) {
+                                var lane = weekRow.weekEvs[i].lane
+                                var barY = weekRow.dynBarTopOffset + lane * (weekRow.dynBarH + barGap)
+                                if (barY + weekRow.dynBarH > weekRow.height) n++
+                            }
+                            return n
+                        }
+
+                        Text {
+                            visible: overlay.hiddenCount > 0
+                            anchors.bottom: parent.bottom
+                            anchors.right:  parent.right
+                            anchors.margins: 4
+                            text: "+" + overlay.hiddenCount + " more"
+                            font.pixelSize: 12
+                            font.bold: true
+                            color: Kirigami.Theme.textColor
+                            opacity: 0.75
+                        }
+
                         Repeater {
                             model: weekRow.weekEvs
                             delegate: Item {
