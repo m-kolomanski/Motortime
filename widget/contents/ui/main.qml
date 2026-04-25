@@ -110,8 +110,13 @@ PlasmoidItem {
         // Which grid row index contains today (-1 if not visible)
         readonly property int weekCount: Plasmoid.configuration.WeekCount || 4
 
+        // Zoom state: clicking "+N more" shows a single week; Back restores normal view
+        property bool isZoomed:       false
+        property int  savedWeekOffset: 0
+        readonly property int effectiveWeekCount: isZoomed ? 1 : weekCount
+
         readonly property int currentGridRow: {
-            for (var i = 0; i < weekCount; i++) {
+            for (var i = 0; i < effectiveWeekCount; i++) {
                 if (today >= weekStartDate(i) && today <= weekEndDate(i)) return i
             }
             return -1
@@ -120,7 +125,7 @@ PlasmoidItem {
         function navLabel() {
             var s = gridStart
             var e = new Date(gridStart)
-            e.setDate(e.getDate() + weekCount * 7 - 1)
+            e.setDate(e.getDate() + effectiveWeekCount * 7 - 1)
             if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear())
                 return Qt.formatDate(s, "MMMM yyyy")
             if (s.getFullYear() === e.getFullYear())
@@ -264,7 +269,33 @@ PlasmoidItem {
                 }
 
                 Rectangle {
-                    visible: weekOffset !== 0
+                    visible: isZoomed
+                    anchors.left:           parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    implicitWidth: backLabel.implicitWidth + 12
+                    height: navH - 6
+                    radius: 4
+                    color: Kirigami.Theme.highlightColor
+                    opacity: backArea.containsMouse ? 1.0 : 0.6
+                    Text {
+                        id: backLabel
+                        anchors.centerIn: parent
+                        text: "← Back"
+                        font.pixelSize: 11
+                        font.bold: true
+                        color: "#ffffff"
+                    }
+                    MouseArea {
+                        id: backArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: { weekOffset = savedWeekOffset; isZoomed = false }
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
+
+                Rectangle {
+                    visible: weekOffset !== 0 && !isZoomed
                     anchors.right:          parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     implicitWidth: todayLabel.implicitWidth + 12
@@ -322,7 +353,7 @@ PlasmoidItem {
 
             // ── week rows ─────────────────────────────────────────────────
             Repeater {
-                model: weekCount
+                model: effectiveWeekCount
                 delegate: Item {
                     id: weekRow
                     readonly property int weekIdx: index
@@ -434,16 +465,33 @@ PlasmoidItem {
                             return n
                         }
 
-                        Text {
+                        Item {
                             visible: overlay.hiddenCount > 0
                             anchors.bottom: parent.bottom
                             anchors.right:  parent.right
                             anchors.margins: 4
-                            text: "+" + overlay.hiddenCount + " more"
-                            font.pixelSize: 12
-                            font.bold: true
-                            color: Kirigami.Theme.textColor
-                            opacity: 0.75
+                            width:  moreLabel.implicitWidth
+                            height: moreLabel.implicitHeight
+
+                            Text {
+                                id: moreLabel
+                                text: "+" + overlay.hiddenCount + " more"
+                                font.pixelSize: 12
+                                font.bold: true
+                                color: Kirigami.Theme.textColor
+                                opacity: moreArea.containsMouse ? 1.0 : 0.75
+                            }
+                            MouseArea {
+                                id: moreArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape:  Qt.PointingHandCursor
+                                onClicked: {
+                                    savedWeekOffset = weekOffset
+                                    weekOffset = weekOffset + weekRow.weekIdx
+                                    isZoomed = true
+                                }
+                            }
                         }
 
                         Repeater {
