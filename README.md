@@ -3,145 +3,96 @@
 > [!WARNING]
 > This thing is vide-coded. I needed a working custom widget for my own purposes. The code quality is not a factor. Take it for what it is or leave it.
 
-A KDE Plasma desktop widget that displays a colorful, always-visible motorsport calendar — showing all major racing series in a single glanceable view.
+A KDE Plasma 6 desktop widget showing a rolling motorsport calendar. Week count is configurable (1–8). Each series gets a configurable color and logo; events render as multi-day bars with country flags and labels.
 
-## What it does
+## What it looks like
 
-Motortime sits on your desktop as a floating widget and shows a rolling 4-week calendar (previous week, current week, two weeks ahead). Each motorsport series gets its own color. Events are rendered as multi-day bars spanning the days of the weekend, with country flag emojis and structured labels so you can tell at a glance what's on and where.
+![Motortime widget screenshot](docs/screenshot.png)
 
-Supported series (planned):
+- Bars span the actual event days (Thursday–Sunday for a typical F1 weekend)
+- Overlapping events stack into lanes; bar height is fixed, so fewer weeks = more lanes visible per row
+- Labels adapt to bar width: full (`🇯🇵 Suzuka | Grand Prix`), city only, or flag only
+- Multi-week events are split across rows with `◀ ▶` continuation markers
+- Navigate with the ▲ ▼ buttons or mouse wheel
+- When a row has more events than fit, a `+N more` label appears — click it to zoom into that single week; a Back button restores the normal view
 
-- Formula 1
-- Formula 2
-- Formula 3
-- FIA World Endurance Championship (WEC)
-- IMSA WeatherTech SportsCar Championship
-- Nürburgring Langstrecken-Serie (NLS)
-- GT World Challenge (GTWC)
-- FIA World Rally Championship (WRC)
+## Supported series
 
-More series can be added via the series config file.
+| Key | Series |
+|-----|--------|
+| F1 | Formula 1 |
+| F2 | Formula 2 |
+| F3 | Formula 3 |
+| FE | Formula E |
+| WEC | FIA World Endurance Championship |
+| IGTC | Intercontinental GT Challenge |
+| IMSA | IMSA WeatherTech SportsCar Championship |
+| NLS | ADAC Nürburgring Langstrecken-Serie |
+| GTWC Europe / America / Asia / Australia | GT World Challenge |
+| WRC | FIA World Rally Championship |
+
+Each series can be enabled/disabled, reordered, and given a custom color in the widget's settings panel. The panel also exposes scroll sensitivity and the number of weeks to display.
 
 ## Architecture
 
 ```
-GitHub Actions (weekly cron)
-  └── scraper/ — fetches iCal feeds and scrapes series sites
-       └── outputs data/events.json → committed to repo
+scraper/          Python — fetches iCal feeds from toomuchracing.com
+  main.py         entry point; outputs widget/contents/data/events.js
+  series/         one module per series (f1.py, wec.py, gtwc.py, …)
+  utils/
+    ical.py       shared iCal fetch + date helpers
+    flags.py      location → (display name, flag emoji) resolution
 
-Widget (Plasma QML Plasmoid)
-  └── fetches data/events.json from GitHub raw URL
-  └── reads series-config.json (bundled) for colors and labels
-  └── renders 4-week calendar grid with colored event bars
+widget/           KDE Plasma 6 QML Plasmoid
+  config/
+    main.xml      KConfig schema (per-series color, enabled, order)
+  contents/
+    ui/
+      main.qml          calendar grid (configurable week count)
+      configGeneral.qml settings panel
+    data/
+      events.js         generated event data (pragma library)
 ```
 
-End users only install the widget — no local scraping or setup required.
+The scraper is run locally and its output (`events.js`) is committed with the widget. There is no runtime network access — the widget reads the bundled file.
 
-## Calendar layout
+## Running the scraper
 
-```
-       Mon   Tue   Wed   Thu   Fri   Sat   Sun
--1     23    24    25    26    27    28    29
-        [════════════ WEC Imola ════════════]
+Requires [uv](https://github.com/astral-sh/uv).
 
- 0     30    31     1     2     3     4     5   ← current week
-                          [🇯🇵 Japan | GP ═══]
-                          [🇯🇵 Japan | F2 ══]
-
-+1      6     7     8     9    10    11    12
-        [══════════════ NLS ════════════════]
-
-+2     13    14    15    16    17    18    19
-                               [🇨🇳 China | GP]
+```bash
+cd scraper
+uv run main.py              # scrape all series for current year
+uv run main.py --series F1 WEC   # specific series only
+uv run main.py --year 2025  # different year
 ```
 
-- Bars span exactly the event days (Friday–Sunday for a typical F1 weekend)
-- Events on overlapping days stack vertically in lanes
-- Labels adapt to bar width: full (`🇯🇵 Japan | Grand Prix`), medium (`🇯🇵 Japan`), or flag-only (`🇯🇵`)
-- Cross-week events are split across rows with visual continuation indicators
+Output is written to `widget/contents/data/events.js` by default.
+
+### Taskfile shortcut
+
+If you have [Task](https://taskfile.dev) installed, `task update` scrapes all series and reloads the Plasma shell.
+
+## Installing the widget
+
+```bash
+kpackagetool6 --install widget/
+```
+
+Or right-click the desktop → *Add or Manage Widgets* → *Install from local file* and point it at the `widget/` directory.
+
+After the widget is on the desktop, right-click it to open settings and configure series visibility and colors.
 
 ## Event data format
 
-Events are stored in `data/events.json`:
+`events.js` is a QML pragma library:
 
-```json
-{
-  "generated": "2026-03-28T12:00:00Z",
-  "events": [
-    {
-      "id": "f1-2026-r4-japan",
-      "series": "F1",
-      "location": "Japan",
-      "event_type": "Grand Prix",
-      "flag": "🇯🇵",
-      "start": "2026-04-04",
-      "end": "2026-04-06"
-    }
-  ]
-}
+```js
+.pragma library
+
+var events = [
+    { series: "F1", location: "Suzuka", event_type: "Grand Prix",
+      flag: "🇯🇵", start: "2026-03-27", end: "2026-03-29" },
+    …
+]
 ```
-
-## Series config format
-
-Series colors and display names are defined in `series-config.json`, bundled with the widget:
-
-```json
-{
-  "F1":   { "color": "#E8002D", "label": "Formula 1" },
-  "F2":   { "color": "#FF6B35", "label": "Formula 2" },
-  "F3":   { "color": "#FFD166", "label": "Formula 3" },
-  "WEC":  { "color": "#00B4D8", "label": "WEC" },
-  "IMSA": { "color": "#06D6A0", "label": "IMSA" },
-  "NLS":  { "color": "#A663CC", "label": "NLS" },
-  "GTWC": { "color": "#F4A261", "label": "GTWC" },
-  "WRC":  { "color": "#EF476F", "label": "WRC" }
-}
-```
-
-## Planned features
-
-### v0.1 — Proof of concept
-- [ ] 4-week rolling calendar grid (Mon–Sun rows)
-- [ ] Multi-day event bars with lane stacking
-- [ ] Adaptive labels (flag + location + event type)
-- [ ] KDE theme-aware background and text colors
-- [ ] Load events from local JSON file (mock data)
-- [ ] Bundled series color config
-
-### v0.2 — Live data
-- [ ] Fetch `events.json` from GitHub raw URL on startup
-- [ ] Periodic refresh (configurable interval)
-- [ ] Graceful offline fallback to cached data
-- [ ] Loading and error states in the widget UI
-
-### v0.3 — Scraper (cloud-side)
-- [ ] GitHub Actions workflow running on weekly cron
-- [ ] iCal feed parsers for: F1, F2, F3, WEC, IMSA, WRC, GTWC
-- [ ] HTML scrapers for series without iCal feeds (NLS, etc.)
-- [ ] Deduplication and normalization pipeline
-- [ ] Auto-commit `data/events.json` to repo
-
-### v0.4 — Widget polish
-- [ ] Right-click config panel: toggle series on/off
-- [ ] Click event bar → show detail tooltip (circuit, session times)
-- [ ] "Today" highlight and week boundary styling
-- [ ] Smooth transitions when data refreshes
-
-### Future ideas
-- Optional sync with KDE calendar app (`.ics` export)
-- Countdown timer to next event
-- Notification support ("Race starts in 1 hour")
-- Support for user-defined custom series/events
-- Light theme variant
-
-## Installation
-
-> Installation instructions will be added once v0.1 is ready.
-
-## Contributing
-
-> Contribution guide will be added before the first public release.
-
-## License
-
-TBD
