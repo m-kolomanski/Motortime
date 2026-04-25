@@ -30,8 +30,6 @@ PlasmoidItem {
             "F3":   "../assets/logos/f3.svg",
             "WEC":  "../assets/logos/wec.svg",
             "IMSA": "../assets/logos/imsa.svg",
-            "NLS":  "",
-            "GTWC": "",
             "WRC":  "../assets/logos/wrc.svg"
         })
 
@@ -118,22 +116,29 @@ PlasmoidItem {
 
         // ── Series helpers ────────────────────────────────────────────────
         readonly property var defaultColors: ({
-            "F1":   "#E8002D",
-            "F2":   "#FF6B35",
-            "F3":   "#FFD166",
-            "WEC":  "#00B4D8",
-            "IMSA": "#06D6A0",
-            "NLS":  "#A663CC",
-            "GTWC": "#F4A261",
-            "WRC":  "#EF476F"
+            "F1":            "#E8002D",
+            "F2":            "#FF6B35",
+            "F3":            "#FFD166",
+            "FE":            "#00D2FF",
+            "WEC":           "#00B4D8",
+            "IGTC":          "#9D4EDD",
+            "IMSA":          "#06D6A0",
+            "NLS":           "#A663CC",
+            "GTWCEurope":    "#F4A261",
+            "GTWCAmerica":   "#E76F51",
+            "GTWCAsia":      "#F4C843",
+            "GTWCAustralia": "#52B788",
+            "WRC":           "#EF476F"
         })
 
+        function seriesKey(s)     { return s.replace(/ /g, "") }
         function seriesColor(s) {
-            var c = Plasmoid.configuration[s + "Color"]
-            return (c && c.length > 0) ? c : (defaultColors[s] || "#888888")
+            var k = seriesKey(s)
+            var c = Plasmoid.configuration[k + "Color"]
+            return (c && c.length > 0) ? c : (defaultColors[k] || "#888888")
         }
         function seriesEnabled(s) {
-            return Plasmoid.configuration[s + "Enabled"] !== false
+            return Plasmoid.configuration[seriesKey(s) + "Enabled"] !== false
         }
         function contrastColor(hex) {
             var r = parseInt(hex.slice(1,3), 16)
@@ -149,7 +154,7 @@ PlasmoidItem {
             var orderStr = Plasmoid.configuration.SeriesOrder
             var orderKeys = (orderStr && orderStr.length > 0)
                 ? orderStr.split(",")
-                : ["F1","F2","F3","WEC","IMSA","NLS","GTWC","WRC"]
+                : ["F1","F2","F3","FE","WEC","IGTC","IMSA","NLS","GTWCEurope","GTWCAmerica","GTWCAsia","GTWCAustralia","WRC"]
             var result = []
             for (var i = 0; i < events.length; i++) {
                 var ev = events[i]
@@ -171,8 +176,8 @@ PlasmoidItem {
                 })
             }
             result.sort(function(a,b) {
-                var pa = orderKeys.indexOf(a.series)
-                var pb = orderKeys.indexOf(b.series)
+                var pa = orderKeys.indexOf(seriesKey(a.series))
+                var pb = orderKeys.indexOf(seriesKey(b.series))
                 if (pa !== pb) return pa - pb
                 if (a.startCol !== b.startCol) return a.startCol - b.startCol
                 return b.spanCols - a.spanCols

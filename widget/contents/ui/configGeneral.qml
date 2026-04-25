@@ -8,33 +8,48 @@ Item {
     id: cfg
     implicitHeight: col.implicitHeight
 
-    property string cfg_SeriesOrder: "F1,F2,F3,WEC,IMSA,NLS,GTWC,WRC"
-    property bool   cfg_F1Enabled:   true
-    property string cfg_F1Color:     "#E8002D"
-    property bool   cfg_F2Enabled:   true
-    property string cfg_F2Color:     "#FF6B35"
-    property bool   cfg_F3Enabled:   true
-    property string cfg_F3Color:     "#FFD166"
-    property bool   cfg_WECEnabled:  true
-    property string cfg_WECColor:    "#00B4D8"
-    property bool   cfg_IMSAEnabled: true
-    property string cfg_IMSAColor:   "#06D6A0"
-    property bool   cfg_NLSEnabled:  true
-    property string cfg_NLSColor:    "#A663CC"
-    property bool   cfg_GTWCEnabled: true
-    property string cfg_GTWCColor:   "#F4A261"
-    property bool   cfg_WRCEnabled:  true
-    property string cfg_WRCColor:    "#EF476F"
+    property string cfg_SeriesOrder:            "F1,F2,F3,FE,WEC,IGTC,IMSA,NLS,GTWCEurope,GTWCAmerica,GTWCAsia,GTWCAustralia,WRC"
+    property bool   cfg_F1Enabled:              true
+    property string cfg_F1Color:                "#E8002D"
+    property bool   cfg_F2Enabled:              true
+    property string cfg_F2Color:                "#FF6B35"
+    property bool   cfg_F3Enabled:              true
+    property string cfg_F3Color:                "#FFD166"
+    property bool   cfg_FEEnabled:              true
+    property string cfg_FEColor:                "#00D2FF"
+    property bool   cfg_WECEnabled:             true
+    property string cfg_WECColor:               "#00B4D8"
+    property bool   cfg_IGTCEnabled:            true
+    property string cfg_IGTCColor:              "#9D4EDD"
+    property bool   cfg_IMSAEnabled:            true
+    property string cfg_IMSAColor:              "#06D6A0"
+    property bool   cfg_NLSEnabled:             true
+    property string cfg_NLSColor:               "#A663CC"
+    property bool   cfg_GTWCEuropeEnabled:      true
+    property string cfg_GTWCEuropeColor:        "#F4A261"
+    property bool   cfg_GTWCAmericaEnabled:     true
+    property string cfg_GTWCAmericaColor:       "#E76F51"
+    property bool   cfg_GTWCAsiaEnabled:        true
+    property string cfg_GTWCAsiaColor:          "#F4C843"
+    property bool   cfg_GTWCAustraliaEnabled:   true
+    property string cfg_GTWCAustraliaColor:     "#52B788"
+    property bool   cfg_WRCEnabled:             true
+    property string cfg_WRCColor:               "#EF476F"
 
     readonly property var seriesNames: ({
-        "F1":   "Formula 1",
-        "F2":   "Formula 2",
-        "F3":   "Formula 3",
-        "WEC":  "World Endurance Championship",
-        "IMSA": "IMSA SportsCar Championship",
-        "NLS":  "Nürburgring Langstrecken",
-        "GTWC": "GT World Challenge",
-        "WRC":  "World Rally Championship"
+        "F1":            "Formula 1",
+        "F2":            "Formula 2",
+        "F3":            "Formula 3",
+        "FE":            "Formula E",
+        "WEC":           "World Endurance Championship",
+        "IGTC":          "Intercontinental GT Challenge",
+        "IMSA":          "IMSA SportsCar Championship",
+        "NLS":           "Nürburgring Langstrecken",
+        "GTWCEurope":    "GTWC Europe",
+        "GTWCAmerica":   "GTWC America",
+        "GTWCAsia":      "GTWC Asia",
+        "GTWCAustralia": "GTWC Australia",
+        "WRC":           "World Rally Championship"
     })
 
     ListModel { id: seriesModel }

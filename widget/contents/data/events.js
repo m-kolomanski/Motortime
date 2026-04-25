@@ -1,6 +1,6 @@
 .pragma library
 
-// Generated: 2026-04-25T12:51:40Z
+// Generated: 2026-04-25T12:58:06Z
 
 var events = [
     { series: "FE", location: "Mexico City", event_type: "ePrix", flag: "\ud83c\uddf2\ud83c\uddfd", start: "2026-01-10", end: "2026-01-10" },

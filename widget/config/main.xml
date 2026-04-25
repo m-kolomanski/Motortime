@@ -5,22 +5,32 @@
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
     <group name="General">
-        <entry name="SeriesOrder" type="String"><default>F1,F2,F3,WEC,IMSA,NLS,GTWC,WRC</default></entry>
-        <entry name="F1Enabled"   type="Bool">  <default>true</default>    </entry>
-        <entry name="F1Color"     type="String"><default>#E8002D</default>  </entry>
-        <entry name="F2Enabled"   type="Bool">  <default>true</default>    </entry>
-        <entry name="F2Color"     type="String"><default>#FF6B35</default>  </entry>
-        <entry name="F3Enabled"   type="Bool">  <default>true</default>    </entry>
-        <entry name="F3Color"     type="String"><default>#FFD166</default>  </entry>
-        <entry name="WECEnabled"  type="Bool">  <default>true</default>    </entry>
-        <entry name="WECColor"    type="String"><default>#00B4D8</default>  </entry>
-        <entry name="IMSAEnabled" type="Bool">  <default>true</default>    </entry>
-        <entry name="IMSAColor"   type="String"><default>#06D6A0</default>  </entry>
-        <entry name="NLSEnabled"  type="Bool">  <default>true</default>    </entry>
-        <entry name="NLSColor"    type="String"><default>#A663CC</default>  </entry>
-        <entry name="GTWCEnabled" type="Bool">  <default>true</default>    </entry>
-        <entry name="GTWCColor"   type="String"><default>#F4A261</default>  </entry>
-        <entry name="WRCEnabled"  type="Bool">  <default>true</default>    </entry>
-        <entry name="WRCColor"    type="String"><default>#EF476F</default>  </entry>
+        <entry name="SeriesOrder" type="String"><default>F1,F2,F3,FE,WEC,IGTC,IMSA,NLS,GTWCEurope,GTWCAmerica,GTWCAsia,GTWCAustralia,WRC</default></entry>
+        <entry name="F1Enabled"             type="Bool">  <default>true</default>    </entry>
+        <entry name="F1Color"               type="String"><default>#E8002D</default>  </entry>
+        <entry name="F2Enabled"             type="Bool">  <default>true</default>    </entry>
+        <entry name="F2Color"               type="String"><default>#FF6B35</default>  </entry>
+        <entry name="F3Enabled"             type="Bool">  <default>true</default>    </entry>
+        <entry name="F3Color"               type="String"><default>#FFD166</default>  </entry>
+        <entry name="FEEnabled"             type="Bool">  <default>true</default>    </entry>
+        <entry name="FEColor"               type="String"><default>#00D2FF</default>  </entry>
+        <entry name="WECEnabled"            type="Bool">  <default>true</default>    </entry>
+        <entry name="WECColor"              type="String"><default>#00B4D8</default>  </entry>
+        <entry name="IGTCEnabled"           type="Bool">  <default>true</default>    </entry>
+        <entry name="IGTCColor"             type="String"><default>#9D4EDD</default>  </entry>
+        <entry name="IMSAEnabled"           type="Bool">  <default>true</default>    </entry>
+        <entry name="IMSAColor"             type="String"><default>#06D6A0</default>  </entry>
+        <entry name="NLSEnabled"            type="Bool">  <default>true</default>    </entry>
+        <entry name="NLSColor"              type="String"><default>#A663CC</default>  </entry>
+        <entry name="GTWCEuropeEnabled"     type="Bool">  <default>true</default>    </entry>
+        <entry name="GTWCEuropeColor"       type="String"><default>#F4A261</default>  </entry>
+        <entry name="GTWCAmericaEnabled"    type="Bool">  <default>true</default>    </entry>
+        <entry name="GTWCAmericaColor"      type="String"><default>#E76F51</default>  </entry>
+        <entry name="GTWCAsiaEnabled"       type="Bool">  <default>true</default>    </entry>
+        <entry name="GTWCAsiaColor"         type="String"><default>#F4C843</default>  </entry>
+        <entry name="GTWCAustraliaEnabled"  type="Bool">  <default>true</default>    </entry>
+        <entry name="GTWCAustraliaColor"    type="String"><default>#52B788</default>  </entry>
+        <entry name="WRCEnabled"            type="Bool">  <default>true</default>    </entry>
+        <entry name="WRCColor"              type="String"><default>#EF476F</default>  </entry>
     </group>
 </kcfg>
