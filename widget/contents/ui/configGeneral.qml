@@ -3,40 +3,10 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kquickcontrols as KQuickControls
+import org.kde.plasma.plasmoid
 
 Item {
-    id: cfg
     implicitHeight: col.implicitHeight
-
-    property string cfg_SeriesOrder:            "F1,F2,F3,FE,WEC,IGTC,IMSA,NLS,GTWCEurope,GTWCAmerica,GTWCAsia,GTWCAustralia,WRC"
-    property bool   cfg_F1Enabled:              true
-    property string cfg_F1Color:                "#F0F0F0"
-    property bool   cfg_F2Enabled:              true
-    property string cfg_F2Color:                "#001F3F"
-    property bool   cfg_F3Enabled:              true
-    property string cfg_F3Color:                "#888888"
-    property bool   cfg_FEEnabled:              true
-    property string cfg_FEColor:                "#00CED1"
-    property bool   cfg_WECEnabled:             true
-    property string cfg_WECColor:               "#1B6FD8"
-    property bool   cfg_IGTCEnabled:            true
-    property string cfg_IGTCColor:              "#9D4EDD"
-    property bool   cfg_IMSAEnabled:            true
-    property string cfg_IMSAColor:              "#5A4535"
-    property bool   cfg_NLSEnabled:             true
-    property string cfg_NLSColor:               "#111111"
-    property bool   cfg_GTWCEuropeEnabled:      true
-    property string cfg_GTWCEuropeColor:        "#0891B2"
-    property bool   cfg_GTWCAmericaEnabled:     true
-    property string cfg_GTWCAmericaColor:       "#7C2D12"
-    property bool   cfg_GTWCAsiaEnabled:        true
-    property string cfg_GTWCAsiaColor:          "#0F766E"
-    property bool   cfg_GTWCAustraliaEnabled:   true
-    property string cfg_GTWCAustraliaColor:     "#16A34A"
-    property bool   cfg_WRCEnabled:             true
-    property string cfg_WRCColor:               "#FF6D00"
-    property int    cfg_ScrollSensitivity:      240
-    property int    cfg_WeekCount:              4
 
     readonly property var seriesNames: ({
         "F1":            "Formula 1",
@@ -58,7 +28,7 @@ Item {
 
     function rebuildModel() {
         seriesModel.clear()
-        var keys = cfg_SeriesOrder.split(",")
+        var keys = Plasmoid.configuration.SeriesOrder.split(",")
         for (var i = 0; i < keys.length; i++) {
             var k = keys[i].trim()
             if (k) seriesModel.append({ key: k })
@@ -69,7 +39,7 @@ Item {
         var keys = []
         for (var i = 0; i < seriesModel.count; i++)
             keys.push(seriesModel.get(i).key)
-        cfg_SeriesOrder = keys.join(",")
+        Plasmoid.configuration.SeriesOrder = keys.join(",")
     }
 
     Component.onCompleted: rebuildModel()
@@ -98,18 +68,18 @@ Item {
 
                 QQC2.CheckBox {
                     id: enabledBox
-                    checked: cfg["cfg_" + model.key + "Enabled"]
-                    onCheckedChanged: cfg["cfg_" + model.key + "Enabled"] = checked
+                    checked: Plasmoid.configuration[model.key + "Enabled"] !== false
+                    onCheckedChanged: Plasmoid.configuration[model.key + "Enabled"] = checked
                 }
 
                 KQuickControls.ColorButton {
                     enabled: enabledBox.checked
-                    color: Qt.color(cfg["cfg_" + model.key + "Color"])
-                    onColorChanged: cfg["cfg_" + model.key + "Color"] = color.toString().toUpperCase()
+                    color: Qt.color(Plasmoid.configuration[model.key + "Color"] || "#ffffff")
+                    onColorChanged: Plasmoid.configuration[model.key + "Color"] = color.toString().toUpperCase()
                 }
 
                 QQC2.Label {
-                    text: cfg.seriesNames[model.key] || model.key
+                    text: seriesNames[model.key] || model.key
                     Layout.fillWidth: true
                 }
             }
@@ -127,8 +97,8 @@ Item {
                 id: scrollSlider
                 Layout.fillWidth: true
                 from: 360; to: 120; stepSize: 120
-                value: cfg_ScrollSensitivity
-                onMoved: cfg_ScrollSensitivity = value
+                value: Plasmoid.configuration.ScrollSensitivity
+                onMoved: Plasmoid.configuration.ScrollSensitivity = value
             }
 
             QQC2.Label {
@@ -146,8 +116,8 @@ Item {
 
             QQC2.SpinBox {
                 from: 1; to: 8
-                value: cfg_WeekCount
-                onValueModified: cfg_WeekCount = value
+                value: Plasmoid.configuration.WeekCount
+                onValueModified: Plasmoid.configuration.WeekCount = value
             }
         }
     }
